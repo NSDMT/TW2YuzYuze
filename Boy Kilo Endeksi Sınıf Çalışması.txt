@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boy Kilo Endeksi</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="col-6">
+    <div class="card p-3">
+      <div class="card-header text-center">
+        <h2>Boy Kilo Endex Hesaplama</h2>
+      </div>
+      <div class="card-body">
+        <label for="boy">Boy</label>
+        <input type="number" id="boy" placeholder="cm türünden giriş yapınız" class="form-control">
+        <label for="kilo">Kilo</label>
+        <input type="number" id="kilo" placeholder="kg cinsinden giriş yapınız" class="form-control">
+        <label for="yas">Yaş</label>
+        <input type="number" id="yas" min="0" max="110" class="form-control">
+        <label for="cinsiyet">Cinsiyet</label>
+        <select id="cinsiyet" class="form-control">
+          <option value="kadin">Kadın</option>
+          <option value="erkek">Erkek</option>
+        </select>
+        <button class="btn btn-success mt-2 form-control" onclick="bke()">Hesapla</button>
+      </div>
+      <div class="card-footer">
+        <h2 class="text-success" id="bkeSonuc"></h2>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    //document.getElementById('bkeSonuc').innerText = kilo / (boy * boy) * 100 * 0.9 * 1.01
+    //kilo/boy*boy
+    //kadınlar0.9 erkekelr 1.1 le çarp
+    // her 10 yaş için 1.01 ne bu
+    //bke<18.5 zayıf 18.5 24.9 arası normal 25 29.9 arası kilolu üstü obez
+    function bke() {
+      var boy = document.getElementById('boy').value;
+      var kilo = document.getElementById('kilo').value;
+      var yas = document.getElementById('yas').value;
+      var cinsiyet = document.getElementById('cinsiyet').value;
+      var lamdaYas = yas / 10;
+      let bke = kilo / (boy * boy) * 10000
+
+
+      if (lamdaYas == 1) {
+        bke = kilo / (boy * boy) * 10000 * 1.01
+      }
+      else if (lamdaYas == 2) {
+        bke = kilo / (boy * boy) * 10000 * 1.02
+      }
+      else if (lamdaYas == 3) {
+        bke = kilo / (boy * boy) * 10000 * 1.03
+      }
+      else if (lamdaYas == 4) {
+        bke = kilo / (boy * boy) * 10000 * 1.04
+      }
+      else if (lamdaYas == 5) {
+        bke = kilo / (boy * boy) * 10000 * 1.05
+      }
+      else if (lamdaYas == 6) {
+        bke = kilo / (boy * boy) * 10000 * 1.06
+      }
+      else if (lamdaYas == 7) {
+        bke = kilo / (boy * boy) * 10000 * 1.07
+      }
+      else if (lamdaYas == 8) {
+        bke = kilo / (boy * boy) * 10000 * 1.08
+      }
+      else if (lamdaYas == 9) {
+        bke = kilo / (boy * boy) * 10000 * 1.09
+      }
+
+      if (cinsiyet == 'kadin') {
+        bke = bke * 0.9
+      }
+      else {
+        bke = bke * 1.1
+      }
+
+      if (bke < 18.5) {
+        document.getElementById('bkeSonuc').innerText = 'Zayıf'
+      }
+      else if (18.5 <= bke < 24.9) {
+        document.getElementById('bkeSonuc').innerText = 'Normal'
+      }
+      else if (24.9 <= bke < 29.9) {
+        document.getElementById('bkeSonuc').innerText = 'Kilolu'
+      }
+      else if (bke > 29.9) {
+        document.getElementById('bkeSonuc').innerText = 'Obez'
+      }
+      else {
+        prompt('Hatalı bir değer girdiniz')
+      }
+    }
+
+  </script>
+</body>
+
+</html>
